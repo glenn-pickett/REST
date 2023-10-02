@@ -1,0 +1,9 @@
+*config.js
+/https/*pem
+/users/*
+/tokens/*
+/checks/*
+*.json
+*.log
+*.b64
+*.env

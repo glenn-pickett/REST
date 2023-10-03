@@ -47,7 +47,7 @@ app.client.request = (headers, path, method, queryStringObject, payload, callbac
         //console.log('Success on app token', app.config.sessionToken);
         xhr.setRequestHeader("token", app.config.sessionToken.tokenId);
     } else {
-        console.log('Failing miserably on token', app.config.sessionToken);
+        //console.log('Failing miserably on token', app.config.sessionToken);
     }
 
     xhr.onreadystatechange = () => {

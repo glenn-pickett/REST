@@ -17,6 +17,6 @@ app.init = ()=>{
     },50);
 }
 
-app.init();
+//app.init();
 
 module.exports = app.init();

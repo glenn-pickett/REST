@@ -10,9 +10,7 @@ import workers from './lib/workers.cjs';
 //let cli = require('./lib/cli');
 //import cli from './lib/cli.cjs';
 
-let app = {};
-
-app.init = ()=>{
+const App = () =>{
     server.init();
     workers.init();
     /*
@@ -22,7 +20,7 @@ app.init = ()=>{
     */
 }
 
-app.init();
+App();
 
 //module.exports = app;
-export default app
+export default App

@@ -1,4 +1,4 @@
-*.json
+*.cjson
 *.log
 *.b64
 *.env

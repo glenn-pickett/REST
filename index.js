@@ -3,9 +3,12 @@
 *
 */
 
-let server = require('./lib/server');
-let workers = require('./lib/workers');
-let cli = require('./lib/cli');
+//let server = require('./lib/server');
+import server from './lib/server.cjs';
+//let workers = require('./lib/workers');
+import workers from './lib/workers.cjs';
+//let cli = require('./lib/cli');
+import cli from './lib/cli.cjs';
 
 let app = {};
 
@@ -19,4 +22,5 @@ app.init = ()=>{
 
 app.init();
 
-module.exports = app;
+//module.exports = app;
+export default app

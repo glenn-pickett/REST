@@ -20,7 +20,7 @@ const App = () =>{
     */
 }
 
-App();
+//App();
 
 //module.exports = app;
-export default App
+export default App();

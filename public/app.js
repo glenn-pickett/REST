@@ -31,7 +31,7 @@ app.client.request = (headers, path, method, queryStringObject, payload, callbac
         }
     }
 
-    console.trace('Payload app req', 'path', path, 'method', cMethod, payload, 'requestUrl', requestUrl, 'queryStringObject', queryStringObject)
+    //console.trace('Payload app req', 'path', path, 'method', cMethod, payload, 'requestUrl', requestUrl, 'queryStringObject', queryStringObject)
     const xhr = new XMLHttpRequest();
     //if( payload.method && payload.method != cMethod ) cMethod = payload.method;
     xhr.open(cMethod, requestUrl, true);
@@ -44,7 +44,7 @@ app.client.request = (headers, path, method, queryStringObject, payload, callbac
     }
 
     if (app.config.sessionToken) {
-        console.log('Success on app token', app.config.sessionToken);
+        //console.log('Success on app token', app.config.sessionToken);
         xhr.setRequestHeader("token", app.config.sessionToken.tokenId);
     } else {
         console.log('Failing miserably on token', app.config.sessionToken);
@@ -58,7 +58,7 @@ app.client.request = (headers, path, method, queryStringObject, payload, callbac
             if (callback) {
                 let parsedResponse = typeof (responseReturned) == 'string' ? JSON.parse(responseReturned) : responseReturned;
                 try {
-                    console.log('Trying readystate', app.config.sessionToken, parsedResponse)
+                    //console.log('Trying readystate', app.config.sessionToken, parsedResponse)
                     callback(statusCode, parsedResponse);
                 } catch (e) {
                     console.log('Failing readystate', app.config, parsedResponse)
@@ -66,12 +66,12 @@ app.client.request = (headers, path, method, queryStringObject, payload, callbac
                 }
             }
         } else {
-            console.log('Failing miserably on readystate', app.config.sessionToken)
+            //console.log('Failing miserably on readystate', app.config.sessionToken)
         }
     }
 
     let payloadString = JSON.stringify(payload);
-    console.log('payload xhr payloadString', payloadString, payloadString.lastName)
+    //console.log('payload xhr payloadString', payloadString, payloadString.lastName)
     //console.log('payload payload', payload, payload.lastName)
     xhr.send(payloadString);
     //xhr.send(payload);
@@ -98,53 +98,6 @@ app.logUserOut = () => {
     });
 };
 
-/*
-app.bindForms = () => {
-    if (document.querySelector('form')) {
-        document.querySelector('form').addEventListener('submit', (e) => {
-            e.preventDefault();
-
-            //console.log('this', this)
-            let formId = e.target.id;
-            let path = e.target.action;
-            //let method = typeof(e.target.method) == 'string' ? e.target.method.toUpperCase():e.target.method;
-            let method = typeof(e.target.attributes.method.value) == 'string' ? e.target.attributes.method.value.toUpperCase():e.target.attributes.method.value;
-
-            console.log('Bindforms formId', formId, 'path', path, 'method', method, e)
-
-            //Hide any previous error message
-            document.querySelector("#"+formId+" .formError").style.display = 'hidden';
-
-            let payload = {};
-            let elements = e.target.elements;
-            console.log('Elements', elements);
-            for (let i = 0; i < elements.length; i++) {
-                if (elements[i].type !== 'submit') {
-                    let valueOfElement = elements[i].type == 'checkbox' ? elements[i].checked : elements[i].value;
-                    payload[elements[i].name] = valueOfElement;
-                }
-            }
-
-            console.log('payload clreq', payload);
-            //Call API
-            app.client.request(undefined, path, method, undefined, payload, (statusCode, responsePayload) => {
-                console.log('statusCode', statusCode, 'responsePayload', responsePayload)
-                if (statusCode !== 200) {
-                    console.log('API not 200', statusCode, responsePayload)
-                    let error = typeof (responsePayload.Error) == 'string' ? responsePayload.Error : '';
-
-                    document.querySelector('#' + formId + ' .formError').innerHTML = error;
-
-                    document.querySelector('#' + formId + ' .formError').style.display = 'block';
-                    
-                } else {
-                    console.log('API 200 formRP')
-                    app.formResponseProcessor(formId, payload, responsePayload)
-                }
-            })
-        })
-    }
-}*/
 
 // Bind the forms
 app.bindForms = function () {
@@ -238,10 +191,10 @@ app.bindForms = function () {
 
 app.formResponseProcessor = (formId, requestPayload, responsePayload) => {
     let functionToCall = false;
-    console.log('FormId', formId, requestPayload)
+    //console.log('FormId', formId, requestPayload)
     if (formId == 'accountCreate') {
         //@TODO
-        console.log('Account success');
+        //console.log('Account success');
         let newPayload = {
             'phone': requestPayload.phone,
             'password': requestPayload.password
@@ -249,11 +202,11 @@ app.formResponseProcessor = (formId, requestPayload, responsePayload) => {
 
         app.client.request(undefined, 'api/tokens', 'POST', undefined, newPayload, (newStatusCode, newResponsePayload) => {
             if (newStatusCode !== 200) {
-                console.log('app:152 token post not 200');
+                //console.log('app:152 token post not 200');
                 document.querySelector("#" + formId + ' .formError').innerHTML = 'Sorry, an error occurred. Please try again.';
                 document.querySelector('#' + formId + ' .formError').style.display = 'block';
             } else {
-                console.log('app:157 token post 200');
+                //console.log('app:157 token post 200');
                 app.setSessionToken(newResponsePayload);
                 window.location = '/checks/all';
             }
@@ -261,7 +214,7 @@ app.formResponseProcessor = (formId, requestPayload, responsePayload) => {
     }
 
     if (formId == 'sessionCreate') {
-        console.log('formResponseProcessor', responsePayload)
+        //console.log('formResponseProcessor', responsePayload)
         app.setSessionToken(responsePayload);
         window.location = '/checks/all';
     }
@@ -272,7 +225,7 @@ app.formResponseProcessor = (formId, requestPayload, responsePayload) => {
     }
 
     if (formId == 'accountEdit3') {
-        console.log('accountEdit3', true);
+        //console.log('accountEdit3', true);
         app.logUserOut(false);
         window.location = '/account/delete';
     }
@@ -290,10 +243,10 @@ app.formResponseProcessor = (formId, requestPayload, responsePayload) => {
 
 app.getSessionToken = () => {
     let tokenString = localStorage.getItem('token');
-    console.log("Getting ses token", tokenString, document.cookie)
+    //console.log("Getting ses token", tokenString, document.cookie)
     if (typeof (tokenString) == 'string') {
         try {
-            console.log('getSes Success', tokenString)
+            //console.log('getSes Success', tokenString)
             let token = JSON.parse(tokenString);
             app.config.sessionToken = token;
             if (typeof (token) == 'object') {
@@ -302,7 +255,7 @@ app.getSessionToken = () => {
                 app.setLoggedInClass(false)
             }
         } catch (e) {
-            console.log('getSes Error')
+            //console.log('getSes Error')
             app.config.sessionToken = false;
             app.setLoggedInClass(false)
         }
@@ -321,7 +274,7 @@ app.setLoggedInClass = (add) => {
 }
 
 app.setSessionToken = (token) => {
-    console.log("Attempting setSesTok", token);
+    //console.log("Attempting setSesTok", token);
     app.config.sessionToken = token;
     let tokenString = JSON.stringify(token);
     localStorage.setItem('token', tokenString);
@@ -339,7 +292,7 @@ app.setSessionToken = (token) => {
 
 // Load the dashboard page specifically
 app.loadCheckListPage = function () {
-    console.log('Checks all loadChecks');
+    //console.log('Checks all loadChecks');
     // Get the phone number from the current token, or log the user out if none is there
     var phone = typeof (app.config.sessionToken.phone) == 'string' ? app.config.sessionToken.phone : false;
     if (phone) {
@@ -362,7 +315,7 @@ app.loadCheckListPage = function () {
                         app.client.request(undefined, 'api/checks', 'GET', newQueryStringObject, undefined, function (statusCode, responsePayload) {
                             if (statusCode == 200) {
                                 var checkData = responsePayload;
-                                console.log('checks list data', checkData)
+                                //console.log('checks list data', checkData)
                                 // Make the check data into a table row
                                 var table = document.getElementById("checksListTable");
                                 var tr = table.insertRow(-1);
@@ -388,10 +341,10 @@ app.loadCheckListPage = function () {
                         // Show the createCheck CTA
                         document.getElementById("createCheckCTA").style.display = 'block';
                     }
-                    console.log('Checks all allChecks', allChecks)
+                    //console.log('Checks all allChecks', allChecks)
 
                 } else {
-                    console.log('Checks all ', responsePayload)
+                    //console.log('Checks all ', responsePayload)
                     // Show 'you have no checks' message
                     document.getElementById("noChecksMessage").style.display = 'table-row';
 
@@ -415,11 +368,11 @@ app.loadCheckListPage = function () {
 app.renewToken = (callback) => {
     // /app.config = JSON.parse(app.config);
     const cookieRead = document.cookie;
-    console.log('Cookie read', cookieRead, cookieRead.tokenId);
+    //console.log('Cookie read', cookieRead, cookieRead.tokenId);
     let tokenString = localStorage.getItem('token');
     let sessionString = sessionStorage.getItem('token');
     let currentToken = typeof (app.config.sessionToken) == 'object' ? app.config.sessionToken : false;
-    console.log("SessionR pre if ", currentToken, app.config, tokenString, 'sessionString', sessionString);
+    //console.log("SessionR pre if ", currentToken, app.config, tokenString, 'sessionString', sessionString);
     if (tokenString) {
         let payload = {
             'id': currentToken.tokenId,
@@ -428,33 +381,33 @@ app.renewToken = (callback) => {
             //'pass': app.config.sessionToken.pass
         };
         //console.log('renewToken payload', payload, app.config, currentToken.tokenId, tokenString, env);
-        console.log('renewToken payload', payload, app.config, currentToken.tokenId, tokenString);
+        //console.log('renewToken payload', payload, app.config, currentToken.tokenId, tokenString);
 
         app.client.request(undefined, 'api/tokens', 'PUT', undefined, payload, (statusCode, responsePayload) => {
 
             if (statusCode == 200) {
-                console.log("SessionR status", statusCode);
+                //console.log("SessionR status", statusCode);
                 let queryStringObject = { 'id': currentToken.tokenId }
                 app.client.request(undefined, 'api/tokens', "GET", queryStringObject, undefined, (statusCode, responsePayload) => {
                     if (statusCode == 200) {
-                        console.log("SessionR GET token 200");
+                        //console.log("SessionR GET token 200");
                         app.setSessionToken(responsePayload);
                         callback(false);
                     } else {
-                        console.log("SessionR GET token not 200", currentToken, app.config);
+                        //console.log("SessionR GET token not 200", currentToken, app.config);
                         app.setSessionToken(false);
                         callback(true);
                     }
                 });
             } else {
-                console.log("SessionR status not 200 checking broken code", JSON.stringify(tokenString).tokenId, tokenString, statusCode, payload, responsePayload);
+                //console.log("SessionR status not 200 checking broken code", JSON.stringify(tokenString).tokenId, tokenString, statusCode, payload, responsePayload);
                 //console.log("SessionR status not 200", statusCode);
                 app.setSessionToken(false);
                 callback(true);
             }
         })
     } else {
-        console.log("SessionR no token", currentToken, app.config);
+        //console.log("SessionR no token", currentToken, app.config);
         app.setSessionToken(false);
         callback(true);
     }
@@ -485,7 +438,7 @@ app.loadDataOnPage = function () {
 app.loadAccountEditPage = function () {
     // Get the phone number from the current token, or log the user out if none is there
     var phone = typeof (app.config.sessionToken.phone) == 'string' ? app.config.sessionToken.phone : false;
-    console.log('Loading account info ', app.config.sessionToken);
+    //console.log('Loading account info ', app.config.sessionToken);
     if (phone) {
         // Fetch the user data
         let queryStringObject = {
@@ -493,7 +446,7 @@ app.loadAccountEditPage = function () {
         };
 
         app.client.request(undefined, 'api/users', 'GET', queryStringObject, undefined, (statusCode, responsePayload) => {
-            console.log('Loading account info responsePayload', responsePayload);
+            //console.log('Loading account info responsePayload', responsePayload);
             if (statusCode == 200) {
                 // Put the data into the forms as values where needed
                 document.querySelector("#accountEdit1 .firstNameInput").value = responsePayload.fName;
@@ -506,7 +459,7 @@ app.loadAccountEditPage = function () {
                     hiddenPhoneInputs[i].value = phone;
                 }
 
-                console.log('Is token here? ', app.config.sessionToken.tokenId);
+                //console.log('Is token here? ', app.config.sessionToken.tokenId);
                 let value = app.config.sessionToken.tokenId;
                 document.querySelector("#token").value = value;
 
@@ -530,7 +483,7 @@ app.loadChecksEditPage = function () {
             'id': id
         };
         app.client.request(undefined, 'api/checks', 'GET', queryStringObject, undefined, function (statusCode, responsePayload) {
-            console.log('Loading check edit info ', responsePayload);
+            //console.log('Loading check edit info ', responsePayload);
             if (statusCode == 200) {
 
                 // Put the hidden id field into both forms
@@ -567,9 +520,9 @@ app.tokenRenewalLoop = () => {
     setInterval(() => {
         app.renewToken((err) => {
             if (!err) {
-                console.log('Token renew success @', Date.now());
+                //console.log('Token renew success @', Date.now());
             } else {
-                console.log("Token renew false error", err);
+                //console.log("Token renew false error", err);
             }
         });
     }, 1000 * 10);

@@ -19,4 +19,4 @@ app.init = ()=>{
 
 app.init();
 
-module.exports = app;
+module.exports.app = () => {};

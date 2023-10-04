@@ -246,7 +246,7 @@ app.getSessionToken = () => {
     //console.log("Getting ses token", tokenString, document.cookie)
     if (typeof (tokenString) == 'string') {
         try {
-            console.log('getSes Success', tokenString)
+            //console.log('getSes Success', tokenString)
             let token = JSON.parse(tokenString);
             app.config.sessionToken = token;
             if (typeof (token) == 'object') {

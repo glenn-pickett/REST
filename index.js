@@ -8,19 +8,19 @@ import server from './lib/server.cjs';
 //let workers = require('./lib/workers');
 import workers from './lib/workers.cjs';
 //let cli = require('./lib/cli');
-import cli from './lib/cli.cjs';
+//import cli from './lib/cli.cjs';
 
-let app = {};
-
-app.init = ()=>{
+const App = () =>{
     server.init();
     workers.init();
+    /*
     setTimeout(()=>{
         cli.init();
     },50);
+    */
 }
 
-app.init();
+//App();
 
 //module.exports = app;
-export default app
+export default App();

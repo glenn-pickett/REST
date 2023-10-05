@@ -2,6 +2,7 @@
 /users/*
 /tokens/*
 /checks/*
+*redis-6.2.4*
 *.log
 *.b64
 *.env

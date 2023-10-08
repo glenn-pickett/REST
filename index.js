@@ -12,15 +12,22 @@ import cli from './lib/cli.cjs';
 
 let app = {};
 
-app.init = ()=>{
+app.init = (callback) => {
     server.init();
     workers.init();
-    setTimeout(()=>{
+    setTimeout(() => {
         cli.init();
-    },50);
+        callback();
+    }, 50);
 }
 
-app.init();
+//Anon function added to trigger done in api test, through callback
+//if (require.main === module) {
+if (import.meta.url.endsWith(process.argv[1])) {
+    app.init(function () { });
+}else{
+    app.init();
+}
 
 //module.exports = app;
-export default app
+export default app;

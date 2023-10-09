@@ -13,11 +13,17 @@
 You need to create a ./lib/.env file and add a secret, lowercase then:
 
 **To run the application locally**:
+Change the config.cjs file credentials to your credentials or put them in the .env file and change the references
 node index.js
 
 **To access the Command Line Interface (CLI) and accepted commands**:
-**Uncomment index.js line 20**
+**Uncomment index.js line 11 and lines 18-23 **
+import cli from './lib/cli.cjs';
+
+setTimeout(() => {
+    cli.init();
     callback();
+}, 50);
 
 node index.js --man
 # or

@@ -16,6 +16,7 @@ You need to create a ./lib/.env file and add a secret, lowercase then:
 node index.js
 
 **To access the Command Line Interface (CLI) and accepted commands**:
+**Uncomment index.js line 20 callback();**
 node index.js --man
 # or
 node index.js --help
@@ -24,6 +25,9 @@ node index.js --help
 To run tests for quality assurance:
 
 node test/index.cjs
+
+**Test performance when using POST on the tokens route**
+NODE_DEBUG=performance node.index.js
 
 **Running In A Cluster**:
 To run the application on multiple cores:

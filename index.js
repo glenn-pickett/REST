@@ -17,7 +17,7 @@ app.init = (callback) => {
     workers.init();
     setTimeout(() => {
         cli.init();
-        callback();
+        //callback();
     }, 50);
 }
 

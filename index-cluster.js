@@ -3,29 +3,35 @@
 *
 */
 
-//let server = require('./lib/server');
 import server from './lib/server.cjs';
-//let workers = require('./lib/workers');
 import workers from './lib/workers.cjs';
-//let cli = require('./lib/cli');
 import cli from './lib/cli.cjs';
+import cluster from 'cluster';
+import os from 'os';
 
 let app = {};
 
 app.init = (callback) => {
-    server.init();
-    workers.init();
-    setTimeout(() => {
-        cli.init();
-        callback();
-    }, 50);
+    if (cluster.isMaster) {
+        workers.init();
+        setTimeout(() => {
+            cli.init();
+            callback();
+        }, 50);
+
+        for(let i=0; i < os.cpus().length; i++){
+            cluster.fork()
+        }
+    } else {
+        server.init();
+    }
 }
 
 //Anon function added to trigger done in api test, through callback
 //if (require.main === module) {
 if (import.meta.url.endsWith(process.argv[1])) {
     app.init(function () { });
-}else{
+} else {
     app.init();
 }
 

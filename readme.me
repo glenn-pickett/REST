@@ -1,0 +1,35 @@
+Uptime Checker
+Uptime Checker is a robust FullStack Node.js and JavaScript application, meticulously crafted without relying on external libraries. This REST API is a testament to the remarkable capabilities of Node.js, showcasing its versatility and power in tackling diverse tasks, using CommonJS and ES6 modules.
+
+Key Features
+Authentication: Secure user authentication and token generation.
+External API Integration: Seamlessly connects to external APIs.
+Background Workers: Executes background tasks efficiently.
+Logging: Comprehensive logging for monitoring and troubleshooting.
+Command Line Interface (CLI): Empowers administrators with system statistics, user information, and logs.
+Testing: Includes unit tests and API tests for code quality assurance.
+
+Getting Started
+You need to create a ./lib/.env file and add a secret, lowercase then:
+
+To run the application locally:
+node index.js
+
+To access the Command Line Interface (CLI) and accepted commands:
+node index.js --man
+# or
+node index.js --help
+
+Running Tests
+To run tests for quality assurance:
+
+node test/index.cjs
+
+Running In A Cluster:
+To run the application on multiple cores:
+node.js index-cluster.js
+
+Note
+While Uptime Checker showcases the prowess of Node.js, please be aware that certain Node.js server configurations may limit some functionalities, such as a read-only filesystem or restricted command-line access. To explore the full potential of this application, we provide a demo account, granting access to the user area.
+
+Feel free to explore the code, contribute, and unleash the power of Node.js with Uptime Checker.

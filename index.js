@@ -10,9 +10,9 @@ import workers from './lib/workers.cjs';
 //let cli = require('./lib/cli');
 import cli from './lib/cli.cjs';
 
-let app = {};
+let App = {};
 
-app.init = (callback) => {
+App.init = (callback) => {
     server.init();
     workers.init();
     setTimeout(() => {
@@ -24,10 +24,10 @@ app.init = (callback) => {
 //Anon function added to trigger done in api test, through callback
 //if (require.main === module) {
 if (import.meta.url.endsWith(process.argv[1])) {
-    app.init(function () { });
+    App.init(function () { });
 }else{
-    app.init();
+    App.init();
 }
 
 //module.exports = app;
-export default app();
+export default App;

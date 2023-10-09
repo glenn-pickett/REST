@@ -16,13 +16,25 @@ You need to create a ./lib/.env file and add a secret, lowercase then:
 node index.js
 
 **To access the Command Line Interface (CLI) and accepted commands**:
-**Uncomment index.js line 20 callback();**
+**Uncomment index.js line 20**
+    callback();
+
 node index.js --man
 # or
 node index.js --help
 
 **Running Tests**
 To run tests for quality assurance:
+**Uncomment server.cjs lines 210-211**
+    console.log('\x1b[36m%s\x1b[0m', "Server listening on port:", config.httpPort);
+    console.log('\x1b[33m%s\x1b[0m', 'Background workers started');
+    
+**Uncomment server.cjs lines 210-211**
+    console.log('\x1b[36m%s\x1b[0m', "Server https listening on port:", config.httpsPort);
+    console.log('\x1b[33m%s\x1b[0m', 'Background workers started');
+    
+**Uncomment server.cjs lines 210-211**
+    console.log('\x1b[33m%s\x1b[0m','Background workers started');
 
 node test/index.cjs
 

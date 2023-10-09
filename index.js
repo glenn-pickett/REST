@@ -15,10 +15,12 @@ let App = {};
 App.init = (callback) => {
     server.init();
     workers.init();
+    /*
     setTimeout(() => {
         cli.init();
         //callback();
     }, 50);
+    */
 }
 
 //Anon function added to trigger done in api test, through callback

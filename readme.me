@@ -1,11 +1,33 @@
 Uptime Checker
+Uptime Checker is a robust FullStack Node.js and JavaScript application, meticulously crafted without relying on external libraries. This REST API is a testament to the remarkable capabilities of Node.js, showcasing its versatility and power in tackling diverse tasks, using CommonJS and ES6 modules.
 
-Uptime Checker is a FullStack Node.js and Javascript application, created without any outside libraries. This REST API demonstrates that Node.js does not
-need any help to get many tasks done. This application is a Node.js server that authenticates users, creates tokens, connects to an external API, has 
-background workers, along with logging. Also, for admins there is a command line interface(CLI) that can give you information about the application 
-such as system statistics, user information and log information. Unit tests and API tests have been added.
+Key Features
+Authentication: Secure user authentication and token generation.
+External API Integration: Seamlessly connects to external APIs.
+Background Workers: Executes background tasks efficiently.
+Logging: Comprehensive logging for monitoring and troubleshooting.
+Command Line Interface (CLI): Empowers administrators with system statistics, user information, and logs.
+Testing: Includes unit tests and API tests for code quality assurance.
 
-Some servers running Node.js have a read-only filesystem or may not give command line access, so some of the functionality may be truncated. So since this
-was originally meant to display the power of Node.js, there is a provided demo account showing the inside of the users area.
+Getting Started
+To run the application locally:
+node index.js
 
+To access the Command Line Interface (CLI):
+node index.js man
+# or
+node index.js help
 
+Running Tests
+To run tests for quality assurance:
+
+node test/index.cjs
+
+Running In A Cluster:
+To run the application on multiple cores:
+node.js index-cluster.js
+
+Note
+While Uptime Checker showcases the prowess of Node.js, please be aware that certain Node.js server configurations may limit some functionalities, such as a read-only filesystem or restricted command-line access. To explore the full potential of this application, we provide a demo account, granting access to the user area.
+
+Feel free to explore the code, contribute, and unleash the power of Node.js with Uptime Checker.
